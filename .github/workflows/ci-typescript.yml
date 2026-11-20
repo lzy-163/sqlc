@@ -19,5 +19,7 @@ jobs:
         with:
           repository: sqlc-dev/sqlc-gen-typescript
           path: typescript
+      - run: make build
+        working-directory: typescript
       - run: sqlc diff
         working-directory: typescript/examples
