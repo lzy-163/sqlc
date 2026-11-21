@@ -13,11 +13,13 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.21.3'
-      - name: install ./...
-        run: go install ./...
+      - name: install sqlc
+        run: go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
       - uses: actions/checkout@v4
         with:
           repository: sqlc-dev/sqlc-gen-typescript
           path: typescript
       - run: sqlc diff
         working-directory: typescript/examples
+        env:
+          PATH: ${{ env.GOPATH }}/bin:${{ env.PATH }}
